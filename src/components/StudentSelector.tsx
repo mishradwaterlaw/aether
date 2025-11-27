@@ -18,7 +18,14 @@ export default function StudentSelector({ onLogin }: StudentSelectorProps) {
     const [mode, setMode] = useState<"LOGIN" | "SETUP">("LOGIN");
     const [error, setError] = useState("");
     const [usnVerify, setUsnVerify] = useState("");
+
     const [showReset, setShowReset] = useState(false);
+    const [loading, setLoading] = useState(true);
+
+    // Initial Loading Effect
+    if (loading) {
+        setTimeout(() => setLoading(false), 2500);
+    }
 
     const filtered = students.filter((s) =>
         s.name.toLowerCase().includes(search.toLowerCase())
@@ -94,13 +101,34 @@ export default function StudentSelector({ onLogin }: StudentSelectorProps) {
         onLogin(selectedStudent, initialData);
     };
 
+    if (loading) {
+        return (
+            <div className="fixed inset-0 bg-black flex flex-col items-center justify-center z-50">
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.5 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 1 }}
+                    className="flex flex-col items-center"
+                >
+                    <img src="/logo.png" alt="Aether Logo" className="w-32 h-32 mb-6 object-contain drop-shadow-[0_0_15px_rgba(59,130,246,0.5)]" />
+                    <h1 className="text-6xl font-bold bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent tracking-[0.2em] uppercase">
+                        Aether
+                    </h1>
+                </motion.div>
+            </div>
+        );
+    }
+
     return (
-        <div className="max-w-4xl mx-auto p-6">
-            <div className="mb-8 text-center">
-                <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-                    GradeVault
-                </h1>
-                <p className="text-gray-400">Secure Grade Forecasting System</p>
+        <div className="max-w-4xl mx-auto p-6 min-h-screen flex flex-col">
+            <div className="mb-12 text-center pt-10">
+                <div className="flex items-center justify-center gap-4 mb-4">
+                    <img src="/logo.png" alt="Aether Logo" className="w-12 h-12 object-contain" />
+                    <h1 className="text-5xl font-bold bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent tracking-widest uppercase">
+                        Aether
+                    </h1>
+                </div>
+                <p className="text-gray-500 text-sm tracking-widest uppercase">The Vault of Knowledge</p>
             </div>
 
             <div className="relative mb-6">
@@ -260,6 +288,10 @@ export default function StudentSelector({ onLogin }: StudentSelectorProps) {
                     </div>
                 )}
             </AnimatePresence>
+
+            <div className="mt-auto pt-10 text-center">
+                <p className="text-gray-600 text-xs tracking-widest uppercase">Made by TheZash</p>
+            </div>
         </div>
     );
 }

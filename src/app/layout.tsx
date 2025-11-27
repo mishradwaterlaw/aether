@@ -5,8 +5,8 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-    title: "GradeVault",
-    description: "Secure Student Grade Forecasting",
+    title: "Aether",
+    description: "The Vault of Knowledge",
 };
 
 export default function RootLayout({
