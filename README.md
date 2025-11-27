@@ -47,4 +47,4 @@ We understand that academic performance is private. **Aether is built with a "Lo
 *   **Security:** Crypto-js (AES-256, SHA-256)
 
 ---
-*Built with ❤️ for students.*
+*Built with ❤️ for students by.....*
